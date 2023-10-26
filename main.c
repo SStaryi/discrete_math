@@ -1,6 +1,9 @@
 #include <stdio.h>
 
+#include "lab3_1/lab3_1.h"
+
 int main() {
-    printf("Hello, World!\n");
+
+
     return 0;
 }
