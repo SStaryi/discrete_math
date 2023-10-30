@@ -11,15 +11,24 @@ int main() {
     printf("Matrix A\n");
     output_matrix(a);
 
+    all_relationship_properties(&a);
+    printf("\n");
+
     Matrix b = get_matrix(size, size);
     matrix_b(b);
     printf("Matrix B\n");
     output_matrix(b);
 
+    all_relationship_properties(&b);
+    printf("\n");
+
     Matrix c = get_matrix(size, size);
     matrix_c(c);
     printf("Matrix C\n");
     output_matrix(c);
+
+    all_relationship_properties(&c);
+    printf("\n");
 
     Matrix d = get_matrix(size, size);
     matrix_d(a, b, c, &d);

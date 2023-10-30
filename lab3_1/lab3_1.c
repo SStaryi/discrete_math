@@ -48,71 +48,97 @@ void matrix_d(Matrix a, Matrix b, Matrix c, Matrix *d) {
     free_matrix(new_c1);
 }
 
-// Функция для проверки рефлексивности матрицы
-bool isReflexive(Matrix *matrix) {
-    for (long long i = 0; i < matrix->n_rows; i++) {
-        if (matrix->values[i][i] != 1) {
+bool is_reflexive(Matrix *matrix) {
+    for (long long i = 0; i < matrix->n_rows; i++)
+        if (matrix->values[i][i] != 1)
             return 0;
-        }
-    }
+
     return 1;
 }
 
-// Функция для проверки симметричности матрицы
-bool isSymmetric(Matrix *matrix) {
-    for (long long i = 0; i < matrix->n_rows; i++) {
-        for (long long j = 0; j < matrix->n_cols; j++) {
-            if (matrix->values[i][j] != matrix->values[j][i]) {
+bool is_symmetric(Matrix *matrix) {
+    for (long long i = 0; i < matrix->n_rows; i++)
+        for (long long j = 0; j < matrix->n_cols; j++)
+            if (matrix->values[i][j] != matrix->values[j][i])
                 return 0;
-            }
-        }
-    }
+
     return 1;
 }
 
-// Функция для проверки транзитивности матрицы
-bool isTransitive(Matrix *matrix) {
-    for (long long i = 0; i < matrix->n_rows; i++) {
-        for (long long j = 0; j < matrix->n_cols; j++) {
-            for (long long k = 0; k < matrix->n_cols; k++) {
-                if (matrix->values[i][j] && matrix->values[j][k] && !matrix->values[i][k]) {
+bool is_transitive(Matrix *matrix) {
+    for (long long i = 0; i < matrix->n_rows; i++)
+        for (long long j = 0; j < matrix->n_cols; j++)
+            for (long long k = 0; k < matrix->n_cols; k++)
+                if (matrix->values[i][j] && matrix->values[j][k] && !matrix->values[i][k])
                     return 0;
-                }
-            }
-        }
-    }
+
     return 1;
 }
 
-// Функция для проверки полноты матрицы
-bool isComplete(Matrix *matrix) {
-    for (long long i = 0; i < matrix->n_rows; i++) {
-        for (long long j = 0; j < matrix->n_cols; j++) {
-            if (i != j && matrix->values[i][j] == 0) {
+bool is_connected(Matrix *matrix) {
+    for (long long i = 0; i < matrix->n_rows; i++)
+        for (long long j = 0; j < matrix->n_cols; j++)
+            // Проверка связности
+            if (i != j && matrix->values[i][j] == 0 && matrix->values[j][i] == 0)
                 return 0;
-            }
-        }
-    }
+
     return 1;
 }
 
-// Функция для проверки толерантности матрицы
-bool isTolerant(Matrix *matrix) {
+bool is_complete(Matrix *matrix) {
+    for (long long i = 0; i < matrix->n_rows; i++)
+        for (long long j = 0; j < matrix->n_cols; j++)
+            if (i != j && matrix->values[i][j] == 0)
+                return 0;
+
+    return 1;
+}
+
+bool is_tolerant(Matrix *matrix) {
     for (long long i = 0; i < matrix->n_rows; i++) {
-        if (matrix->values[i][i] != 1) {
+        if (matrix->values[i][i] != 1)
             return 0;
-        }
-        for (long long j = 0; j < matrix->n_cols; j++) {
-            if (i != j && matrix->values[i][j] != 0 && matrix->values[j][i] != 1) {
+
+        for (long long j = 0; j < matrix->n_cols; j++)
+            if (i != j && matrix->values[i][j] != 0 && matrix->values[j][i] != 1)
                 return 0;
-            }
-        }
     }
+
     return 1;
 }
 
-// Функция для проверки эквивалентности матрицы
-bool isEquivalent(Matrix *matrix) {
-    return isReflexive(matrix) && isSymmetric(matrix) && isTransitive(matrix);
+bool is_equivalent(Matrix *matrix) {
+    return is_reflexive(matrix) && is_symmetric(matrix) && is_transitive(matrix);
 }
 
+bool is_order(Matrix *matrix) {
+    return is_reflexive(matrix) && !is_symmetric(matrix) && is_transitive(matrix);
+}
+
+bool is_strict_order(Matrix *matrix) {
+    return !is_reflexive(matrix) && !is_symmetric(matrix) && is_transitive(matrix);
+}
+
+bool is_linear_order(Matrix *matrix) {
+    return is_reflexive(matrix) && !is_symmetric(matrix) && is_transitive(matrix) &&
+           is_connected(matrix);
+}
+
+bool is_strict_linear_order(Matrix *matrix) {
+    return !is_reflexive(matrix) && !is_symmetric(matrix) && is_transitive(matrix) &&
+           is_connected(matrix);
+}
+
+void all_relationship_properties(Matrix *m) {
+    printf("Reflexive: %d\n", is_reflexive(m));
+    printf("Symmetric: %d\n", is_symmetric(m));
+    printf("Transitive: %d\n", is_transitive(m));
+    printf("Connected: %d\n", is_connected(m));
+    printf("Complete: %d\n", is_complete(m));
+    printf("Tolerant: %d\n", is_tolerant(m));
+    printf("Equivalent: %d\n", is_equivalent(m));
+    printf("Order: %d\n", is_order(m));
+    printf("Strict order: %d\n", is_strict_order(m));
+    printf("Linear order: %d\n", is_linear_order(m));
+    printf("Strict linear order: %d\n", is_strict_linear_order(m));
+}

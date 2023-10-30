@@ -141,7 +141,7 @@ Matrix addition(Matrix *a, Matrix *b) {
 void appeal(Matrix *original_matrix, Matrix *matrix_for_operations) {
     // Проверка на совместимость матриц
     assert(original_matrix->n_rows == matrix_for_operations->n_cols &&
-        original_matrix->n_cols == matrix_for_operations->n_rows);
+           original_matrix->n_cols == matrix_for_operations->n_rows);
 
     for (long long x = 0; x < original_matrix->n_cols; x++)
         for (long long y = 0; y < original_matrix->n_rows; y++)
