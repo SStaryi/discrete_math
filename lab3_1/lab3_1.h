@@ -20,11 +20,20 @@ void matrix_d(Matrix a, Matrix b, Matrix c, Matrix *d);
 // Функция для проверки рефлексивности матрицы
 bool is_reflexive(Matrix *matrix);
 
+// Функция для проверки антирефлексивности
+bool is_antireflexive(Matrix *matrix);
+
 // Функция для проверки симметричности матрицы
 bool is_symmetric(Matrix *matrix);
 
+// Функция для проверки антисимметричности
+bool is_antisymmetric(Matrix *matrix);
+
 // Функция для проверки транзитивности матрицы
 bool is_transitive(Matrix *matrix);
+
+// Функция для проверки антитранзитивности
+bool is_antitransitive(Matrix *matrix);
 
 // Функция для проверки свойства связности
 bool is_connected(Matrix *matrix);
@@ -44,11 +53,17 @@ bool is_order(Matrix *matrix);
 // Функция для проверки свойства строгого порядка
 bool is_strict_order(Matrix *matrix);
 
+// Функция для проверки не строгого порядка
+bool is_not_strict_order(Matrix *matrix);
+
 // Функция для проверки свойства линейного порядка
 bool is_linear_order(Matrix *matrix);
 
 // Функция для проверки свойства строгого линейного порядка
 bool is_strict_linear_order(Matrix *matrix);
+
+// Функция для проверки не строгого линейного порядка
+bool is_not_strict_linear_order(Matrix *matrix);
 
 void all_relationship_properties(Matrix *m);
 
